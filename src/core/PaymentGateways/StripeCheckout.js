@@ -3,7 +3,7 @@ import { IsAuthenticated } from '../../auth/helper';
 import { cartEmpty, loadCart } from '../helper/CartHelper';
 import { Link } from 'react-router-dom';
 import StripeCheckoutButton from 'react-stripe-checkout'
-import { API } from '../../backend';
+import { API,PUBLISHABLE_KEY } from '../../backend';
 import { createOrder } from '../helper/OrderHelper';
 
 
@@ -53,7 +53,7 @@ const StripeCheckout = ({
     const showStripeButton = () => {
         return IsAuthenticated() ? (
             <StripeCheckoutButton
-                stripeKey="pk_test_51GtAWeBbltFm7yj0gXU6U1ghY6ONtRMsVgWNZR9JheTfZLUuvxKSiexEj8ZX7TiQ3pG3EXuOD5mBc6DA17OJOLYi00wDMA6cZU"
+                stripeKey=`${PUBLISHABLE_KEY}`
                 token={makePayment}
                 amount={getFinalAmount() * 100}
                 name="Buy Tshirts"
