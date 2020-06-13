@@ -40,9 +40,10 @@ export const removeItemformCart = (productId) => {
 }
 
 
-export const cartEmpty = next => {
+export const cartEmpty = () => {
     if (typeof window != undefined) {
-        localStorage.removeItem("cart")
-        next();
+        localStorage.removeItem("cart");
+        let cart = []
+        localStorage.setItem("cart", JSON.stringify(cart))
     }
 }

@@ -5,24 +5,20 @@ import Base from './Base';
 import Card from './Card';
 import { getproducts } from './helper/coreapicalls';
 import { loadCart } from './helper/CartHelper';
-import StripeCheckout from './PaymentGateways/StripeCheckout';
+import BraintreePayment from './PaymentGateways/BraintreePayment';
 
-
-export default function Cart() {
-
-    const [products, setproducts] = useState([])
-
-    const [reload, setReload] = useState(false)
-
+const Cart = () => {
+    const [products, setProducts] = useState([]);
+    const [reload, setReload] = useState(false);
 
     useEffect(() => {
-        setproducts(loadCart())
-    }, [reload])
+        setProducts(loadCart());
+    }, [reload]);
 
     const loadAllProducts = () => {
         return (
             <div>
-                <h2>Cart Items</h2>
+                <h2>This section is to load products</h2>
                 {products.map((product, index) => (
                     <Card
                         key={index}
@@ -30,27 +26,36 @@ export default function Cart() {
                         RemoveFromCart={true}
                         AddToCart={false}
                         setReload={setReload}
-                        reload={reload} />
+                        reload={reload}
+                    />
                 ))}
             </div>
-        )
-    }
+        );
+    };
     const loadCheckout = () => {
         return (
             <div>
-                <StripeCheckout
-                    products={products}
-                    setReload={setReload} />
+                <h2>This section for checkout</h2>
             </div>
-        )
-    }
+        );
+    };
 
     return (
-        <Base tittle="Cart items" description="Ready to checkout">
+        <Base title="Cart Page" description="Ready to checkout">
             <div className="row text-center">
-                <div className="col-6">{loadAllProducts()}</div>
-                <div className="col-6">{loadCheckout()}</div>
+                <div className="col-6">
+                    {products.length > 0 ? (
+                        loadAllProducts()
+                    ) : (
+                            <h4>No products</h4>
+                        )}
+                </div>
+                <div className="col-6">
+                    <BraintreePayment products={products} setReload={setReload} />
+                </div>
             </div>
         </Base>
     );
-}
+};
+
+export default Cart;
