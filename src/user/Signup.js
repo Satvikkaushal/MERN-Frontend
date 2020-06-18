@@ -102,7 +102,7 @@ const Signup = () => {
             {successMessage()}
             {errorMessage()}
             {signUpForm()}
-            <p className="text-white">{JSON.stringify(values)}</p>
+
         </Base>
     )
 }
