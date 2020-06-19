@@ -56,9 +56,9 @@ const Cart = () => {
                 <div className="col-6">
                     {IsAuthenticated() ? (
                         <BraintreePayment products={products} setReload={setReload} />
-                    ) : (
-                            <h4>Please Login to checkout</h4>
-                            <Link className="btn btn-success btn-block" to="/signin"> Login</Link>
+                    ) : (<div>
+                        <h4>Please Login to checkout</h4>
+                        <Link className="btn btn-success btn-block" to="/signin"> Login</Link></div>
                         )}
                 </div>
             </div>
