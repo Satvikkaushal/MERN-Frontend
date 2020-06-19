@@ -6,6 +6,9 @@ import Card from './Card';
 import { getproducts } from './helper/coreapicalls';
 import { loadCart } from './helper/CartHelper';
 import BraintreePayment from './PaymentGateways/BraintreePayment';
+import { IsAuthenticated } from '../auth/helper';
+import { Link } from "react-router-dom";
+
 
 const Cart = () => {
     const [products, setProducts] = useState([]);
@@ -51,7 +54,11 @@ const Cart = () => {
                         )}
                 </div>
                 <div className="col-6">
-                    <BraintreePayment products={products} setReload={setReload} />
+                    {IsAuthenticated() ? (
+                        <BraintreePayment products={products} setReload={setReload} />
+                    ) : (
+                            <Link className="btn btn-success btn-block" to="/signin"> Login</Link>
+                        )}
                 </div>
             </div>
         </Base>
