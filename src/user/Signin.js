@@ -81,7 +81,11 @@ const Signin = () => {
         );
     };
 
-
+    const googleSignIn = () => {
+        return (
+            <div className="g-signin2" data-onsuccess="onSignIn"></div>
+        )
+    }
 
     const signInForm = () => {
         return (
@@ -107,6 +111,7 @@ const Signin = () => {
         <Base tittle="SignIn page">
             {LoadingMessage()}
             {errorMessage()}
+            {googleSignIn()}
             {signInForm()}
             {performRedirect()}
         </Base>

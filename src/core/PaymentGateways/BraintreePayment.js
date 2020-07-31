@@ -66,6 +66,7 @@ const BraintreePayment = ({ products, setReload = f => f, reload = undefined }) 
             processPayment(userId, token, paymentData)
                 .then(response => {
                     setInfo({ ...info, success: response.success, loading: false });
+                    console.log(products)
                     const orderData = {
                         products: products,
                         transaction_id: response.transaction_id,
